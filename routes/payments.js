@@ -7,8 +7,11 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res) {
-    console.log(req)
-    res.send('respond with a resource');
+    const signature = req.header('x-square-signature');
+    const body = JSON.stringify(req.body);
+    console.log(body)
+    // Send a 200 response to indicate success
+    resp.sendStatus(200);
 });
 
 module.exports = router;
