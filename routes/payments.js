@@ -11,7 +11,7 @@ router.post('/', function(req, res) {
     const body = JSON.stringify(req.body);
     console.log(body)
     // Send a 200 response to indicate success
-    resp.sendStatus(200);
+    res.sendStatus(200);
 });
 
 module.exports = router;
