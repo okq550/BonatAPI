@@ -5,6 +5,11 @@ app.get('/', function (req, res) {
   res.send('Hello World!');
 });
 
+app.post('/bonat', (req, res) => {
+  console.log('Got body:', req.body);
+  res.sendStatus(200);
+});
+
 app.listen('8080', function () {
     console.log('Test');
 });
