@@ -4,10 +4,10 @@ var router = express.Router();
 const {  ApiError, Client, Environment  } = require('square')
 
 const client = new Client({
-  timeout:3000,
-  environment: Environment.Sandbox, // `Environment.Sandbox` to access sandbox resources
-  accessToken: 'EAAAEBWruGFLvWCaxNllBS43zaP4oQ1ntO89cyim60g21-msUzWJqg6SLVYlI67D',
-})
+    timeout:3000,
+    environment: Environment.Production, // `Environment.Sandbox` to access sandbox resources
+    accessToken: 'EAAAEeIfHSYp-sGu3Cygm8gCEmYJEe4DHnJOoJWOQFIr5zM4HleeR8FuCUdnMQ_8',
+  })
 
 /* Handle payments. */
 router.get('/', function(req, res, next) {
@@ -16,6 +16,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res) {
     const signature = req.header('x-square-signature');
+    console.log('Signature in payment: ' + signature);
     const body = JSON.stringify(req.body);
     console.log('Payments')
     console.log(body)
