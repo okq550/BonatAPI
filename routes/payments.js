@@ -11,12 +11,13 @@ const client = new Client({
 
 /* Handle payments. */
 router.get('/', function(req, res, next) {
+  console.log(process.env.DB_HOST);
   res.send('respond with a resource');
 });
 
 router.post('/', function(req, res) {
     const signature = req.header('x-square-signature');
-    console.log('Signature in payment: ' + signature);
+    console.log(signature);
     const body = JSON.stringify(req.body);
     console.log('Payments')
     console.log(body)
