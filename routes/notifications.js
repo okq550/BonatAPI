@@ -9,7 +9,7 @@ const client = new Client({
   accessToken: 'EAAAEBWruGFLvWCaxNllBS43zaP4oQ1ntO89cyim60g21-msUzWJqg6SLVYlI67D',
 })
 
-/* Handle payments. */
+/* Handle notifications. */
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res) {
     const signature = req.header('x-square-signature');
     const body = JSON.stringify(req.body);
-    console.log('Payments')
+    console.log('Notifications')
     console.log(body)
     // Send a 200 response to indicate success
     res.sendStatus(200);
