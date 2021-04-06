@@ -7,8 +7,8 @@ exports.savePayment = async function (req, res, next) {
   const payload = req.body;
   const signature = req.header("x-square-signature");
   const body = req.body;
-  const url = req.url;
-//   const url = "https://bonat-api-73au3.ondigitalocean.app/payments/";
+//   const url = req.url;
+  const url = "https://bonat-api-73au3.ondigitalocean.app/payments/";
 
   // Concatenate your notification URL and
   // the JSON body of the webhook notification
