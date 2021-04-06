@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "update": "prisma generate",
+    "postinstall": "npm run update"
   },
   "dependencies": {
     "@prisma/client": "^2.20.1",
