@@ -1,38 +1,13 @@
-const crypto = require("crypto");
+const validator = require("../helpers/validator");
 const paymentsRepository = require("../repositories/paymentsRepository");
 
 exports.savePayment = async function (req, res, next) {
   // Validate request parameters, queries using express-validator
   //   const body = JSON.stringify(req.body);
   const payload = req.body;
-  const signature = req.header("x-square-signature");
-  const body = req.body;
-//   const url = req.url;
-  const url = "https://bonat-api-73au3.ondigitalocean.app/payments/";
-
-  // Concatenate your notification URL and
-  // the JSON body of the webhook notification
-  const combined = url + body;
-
-  // Webhook subscription signature key defined in dev portal for app
-  // webhook listener endpoint: https://webhook.site/my-listener-endpoint
-  // Note: Signature key is truncated for illustration
-  const signatureKey = "biJMlpVugIP3exPLmooOxw";
-
-  // Generate the HMAC-SHA1 signature of the string
-  // signed with your webhook signature key
-  const hmac = crypto.createHmac("sha1", signatureKey);
-  hmac.write(combined);
-  hmac.end();
-  const checkHash = hmac.read().toString("base64");
-
-  // Compare HMAC-SHA1 signatures.
-  console.log(checkHash + " === " + signature);
-
-  if (checkHash === signature) {
-    console.log("Validation success!");
-  } else {
-    console.log("Validation error.");
+  
+  if (! await validator.validateSignature(req)){
+    return res.status(400).json({ status: 400, message: "Signature mismatch" });
   }
 
   try {
@@ -69,11 +44,3 @@ exports.getAllPayments = async function (req, res, next) {
     return res.status(400).json({ status: 400, message: e.message });
   }
 };
-
-// exports.validateSignature = async function (req) {
-//   // Validate request parameters, queries using express-validator
-//   const signature = req.header("x-square-signature");
-//   const body = req.body;
-//   const url = req.url;
-//   console.log(req);
-// };
