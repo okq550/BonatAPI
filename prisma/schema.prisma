@@ -1,19 +1,20 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+generator client {
+  provider = "prisma-client-js"
+}
 
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
-generator client {
-  provider = "prisma-client-js"
+model Payments {
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  eventType Event     @default(CREATED)
+  payload   Json
 }
 
-
-model Payment {
-  id        Int      @default(autoincrement()) @id
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  object    Json
+enum Event {
+  CREATED
+  UPDATED
 }

@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const paymentsController = require('../controllers/paymentsController');
+const paymentsController = require("../controllers/paymentsController");
 
 // const { ApiError, Client, Environment } = require("square");
 
@@ -12,17 +12,7 @@ const paymentsController = require('../controllers/paymentsController');
 // });
 
 /* Handle payments. */
-router.get('/', paymentsController.getAllPayments);
-router.post('/', paymentsController.savePayment);
-
-// router.post("/", function (req, res) {
-//   const signature = req.header("x-square-signature");
-//   console.log(signature);
-//   const body = JSON.stringify(req.body);
-//   console.log("Payments");
-//   console.log(body);
-//   // Send a 200 response to indicate success
-//   res.sendStatus(200);
-// });
+router.get("/", paymentsController.getAllPayments);
+router.post("/", paymentsController.savePayment);
 
 module.exports = router;
