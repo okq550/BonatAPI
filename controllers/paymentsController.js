@@ -28,17 +28,19 @@ exports.savePayment = async function (req, res, next) {
 
 exports.getAllPayments = async function (req, res, next) {
   // Validate request parameters, queries using express-validator
-  console.log("paymentsController");
-  res.send("respond with a paymentsController");
+  console.log(req.query);
+  var page = req.query.page ? req.query.page : 1;
+  var limit = req.query.limit ? req.query.limit : 10;
 
-  var page = req.params.page ? req.params.page : 1;
-  var limit = req.params.limit ? req.params.limit : 10;
+  page = parseInt(page);
+  limit = parseInt(limit);
+  
   try {
-    var users = await UserService.getUsers({}, page, limit);
+    var payments = await paymentsRepository.getPayments(page, limit);
     return res.status(200).json({
       status: 200,
-      data: users,
-      message: "Succesfully Users Retrieved",
+      data: payments,
+      message: "Succesfully payments Retrieved",
     });
   } catch (e) {
     return res.status(400).json({ status: 400, message: e.message });

@@ -17,8 +17,16 @@ exports.createPayment = async function (eventType, payloadJson) {
   }
 };
 
-exports.getPayments = async function (query, page, limit) {
+exports.getPayments = async function (page, limit) {
   const prisma = new PrismaClient();
-  const allPayments = await prisma.payments.findMany();
+  console.log(page);
+  console.log(limit);
+  const allPayments = await prisma.payments.findMany({
+    skip: page,
+    take: limit,
+    orderBy: {
+      createdAt: 'desc',
+    },
+  });
   return allPayments;
 };
